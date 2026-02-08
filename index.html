@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Valeria Experience - Platinum Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* SETUP GENERALE */
+        * { box-sizing: border-box; }
+        
+        body {
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* CONTENITORE PRINCIPALE (A4 LANDSCAPE) */
+        .slide-container {
+            background-color: #fffaf0;
+            border: 15px solid #ff5722;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            width: 297mm;  
+            height: 210mm; 
+            overflow: hidden;
+            padding: 60px;
+            position: relative;
+        }
+
+        /* DECORAZIONI PAPEL PICADO */
+        .papel-picado {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: repeating-linear-gradient(90deg, #e91e63 0, #e91e63 100px, #00bfa5 100px, #00bfa5 200px, #ffeb3b 200px, #ffeb3b 300px);
+            z-index: 10;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 95% 70%, 90% 100%, 85% 70%, 80% 100%, 75% 70%, 70% 100%, 65% 70%, 60% 100%, 55% 70%, 50% 100%, 45% 70%, 40% 100%, 35% 70%, 30% 100%, 25% 70%, 20% 100%, 15% 70%, 10% 100%, 5% 70%, 0% 100%);
+        }
+
+        /* TESTI */
+        h1, h2, h3 {
+            color: #d84315;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .slide-title {
+            font-size: 40px;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #00bfa5;
+            display: inline-block;
+        }
+
+        p { font-size: 20px; color: #4e342e; line-height: 1.5; margin-bottom: 10px; }
+
+        /* LAYOUT GRIGLIA */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* IMMAGINI */
+        .image-wrapper {
+            border: 8px solid #ff5722;
+            height: 400px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #ddd;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* CARD COUPON */
+        .coupon-card {
+            background: #fff;
+            border: 3px dashed #d84315;
+            padding: 30px;
+            position: relative;
+            box-shadow: 10px 10px 0px #00bfa5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+        }
+
+        .coupon-tag {
+            background: #e91e63;
+            color: white;
+            padding: 8px 18px;
+            font-weight: bold;
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            transform: rotate(3deg);
+            z-index: 5;
+        }
+
+        /* QR CODE */
+        .qr-container {
+            align-self: flex-end;
+            margin-top: auto;
+            padding: 8px;
+            border: 1px solid #eee;
+            background: #fafafa;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .qr-container img { width: 80px; height: 80px; display: block; margin: 0 auto 5px auto; }
+        .qr-text { font-size: 10px; font-weight: bold; color: #d84315; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+
+        /* PULSANTE STAMPA */
+        .print-btn {
+            position: fixed; top: 20px; right: 20px; z-index: 9999;
+            background: #ff5722; color: white; border: none;
+            padding: 15px 30px; border-radius: 50px;
+            font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* MEDIA QUERY PER STAMPA */
+        @media print {
+            @page { size: A4 landscape; margin: 0; }
+            body { background: white; padding: 0; display: block; }
+            .slide-container {
+                box-shadow: none;
+                border: 15px solid #ff5722 !important;
+                page-break-after: always;
+                margin: 0;
+                width: 100%;
+                height: 100vh;
+            }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">
+    <i class="fa-solid fa-print"></i> Print / Save PDF
+</button>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <div class="content-area" style="text-align: center;">
+        <h1 style="font-size: 70px; margin-top: 40px;">VALERIA:<br><span style="color: #00bfa5;">EL PASAPORTE PLATINO</span></h1>
+        <p style="font-size: 32px; font-weight: bold; margin-top: 20px;">Exclusive Experience Program</p>
+        <div style="margin-top: 40px; display: flex; justify-content: center;">
+            <img src="https://images.unsplash.com/photo-1512813195386-6cf811ad3542?auto=format&fit=crop&q=80&w=1000" alt="" style="width: 600px; border-radius: 10px; border: 5px solid #d84315;">
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">¡Hola Valeria!</h2>
+    <div class="content-area">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <h3 style="margin-bottom: 30px; font-size: 35px;">Membership Status Update</h3>
+            <p style="font-size: 24px;">Dear <strong>Valeria</strong>,</p>
+            <p style="font-size: 24px;">We are pleased to inform you that your profile has been selected for exclusive access to the <strong>"Valeria Platinum Edition"</strong> program.</p>
+            <p style="font-size: 24px;">From the heart of Texas to the vibrant flavors of Mexico: this voucher book is a celebration of <strong>you</strong>. No cost required, just your presence and your smile.</p>
+            <p style="margin-top: 40px; font-size: 24px;">
+                <em>Safe travels, <br>Your Personal Concierge</em><br>
+                <strong style="font-size: 28px; display: block; margin-top: 10px;">Paolo</strong>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #01</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="coupon-card">
+                <div class="coupon-tag">VALID NOW</div>
+                <div>
+                    <h3 style="color: #00bfa5; font-size: 28px; margin-bottom: 15px;">La Fiesta Gastronómica</h3>
+                    <p><strong>Service:</strong> A complete tasting experience in the best Mexican restaurant in town.</p>
+                    <p><strong>Bonus:</strong> From Guacamole to artisanal Mole, a journey through the most iconic flavors.</p>
+                    <p style="color: #e91e63; font-weight: 800; border-left: 4px solid #e91e63; padding-left: 10px; margin-top: 15px;">
+                        <i class="fa-solid fa-pepper-hot"></i> SPICY DESSERT INCLUDED
+                    </p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20La%20Fiesta%20Gastron%C3%B3mica" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://s7g10.scene7.com/is/image/barcelo/pin-and-travel-mole-poblano-chiles2x-1?&&fmt=webp-alpha&qlt=75&wid=2000&fit=crop,1" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #02</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="image-wrapper">
+                <img src="lago limides.JPG" alt="Lago Limides">
+            </div>
+            <div class="coupon-card">
+                <div class="coupon-tag">NATURE EXPLORER</div>
+                <div>
+                    <h3 style="color: #009688; font-size: 28px; margin-bottom: 15px;">El Lago de Cristal</h3>
+                    <p><strong>Service:</strong> A mountain hiking excursion to discover a stunning Dolomitic lake.</p>
+                    <p><strong>Bonus:</strong> Pure air, breathtaking views, and the perfect spot for unforgettable photos.</p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20El%20Lago%20de%20Cristal" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #03</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="coupon-card">
+                <div class="coupon-tag">ACTION PACKED</div>
+                <div>
+                    <h3 style="color: #e91e63; font-size: 28px; margin-bottom: 15px;">Misión: Tres Pedali</h3>
+                    <p><strong>Service:</strong> Learn the art of manual shifting and master the gears like a true driver.</p>
+                    <p><strong>Bonus:</strong> Individual lessons provided with <strong>infinite patience</strong> and zero stress.</p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20Misi%C3%B3n:%20Tres%20Pedali" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://storage.googleapis.com/fp-media/1/2019/02/cambio_manuale.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #04</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1000" alt="">
+            </div>
+            <div class="coupon-card">
+                <div class="coupon-tag">ADVENTURE</div>
+                <div>
+                    <h3 style="color: #ff9800; font-size: 28px; margin-bottom: 15px;">La Escapada Sin Rumbo</h3>
+                    <p><strong>Service:</strong> A one-day trip (destination of your choice or a surprise).</p>
+                    <p><strong>Notes:</strong> I drive, you choose the playlist. Getting lost counts as an adventure.</p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20La%20Escapada%20Sin%20Rumbo" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #05</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="coupon-card">
+                <div class="coupon-tag">WEEKEND REWARD</div>
+                <div>
+                    <h3 style="color: #00bfa5; font-size: 28px; margin-bottom: 15px;">El Oasis de Serenidad</h3>
+                    <p><strong>Service:</strong> A whole day of absolute relaxation at a spa after a week of work.</p>
+                    <p><strong>Bonus:</strong> Designed to melt away all stress with thermal paths.</p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20El%20Oasis%20de%20Serenidad" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="Monticello_est.jpg" alt="Spa Experience">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #06</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&q=80&w=1000" alt="">
+            </div>
+            <div class="coupon-card">
+                <div class="coupon-tag">LOCAL EXPERIENCE</div>
+                <div>
+                    <h3 style="color: #d84315; font-size: 28px; margin-bottom: 15px;">Venecia: Rincones Secretos</h3>
+                    <p><strong>Service:</strong> A guided exploration of Venice, discovering hidden alleys and silent canals.</p>
+                    <p><strong>Bonus:</strong> The true magic of the city is only discovered by intentionally getting lost.</p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20Venecia:%20Rincones%20Secretos" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #07</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="coupon-card">
+                <div class="coupon-tag">SPECIAL PROCUREMENT</div>
+                <div>
+                    <h3 style="color: #ff9800; font-size: 28px; margin-bottom: 15px;">Búsqueda: Tocino de Pavo</h3>
+                    <p><strong>Service:</strong> A dedicated search mission to find the "rare" turkey bacon in Italian supermarkets.</p>
+                    <p style="color: #e91e63; font-weight: 800; border-left: 4px solid #e91e63; padding-left: 10px; margin-top: 15px;">
+                        <i class="fa-solid fa-utensils"></i> SPECIAL MISSION
+                    </p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20B%C3%BAsqueda:%20Tocino%20de%20Pavo" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://www.wholesomeyum.com/wp-content/uploads/2023/10/wholesomeyum-How-To-Cook-Turkey-Bacon-In-The-Oven-7.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container">
+    <div class="papel-picado"></div>
+    <h2 class="slide-title">Voucher #08</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="image-wrapper">
+                <img src="TX-MX.jpg" alt="Texas-Mexico border landscape">
+            </div>
+            <div class="coupon-card">
+                <div class="coupon-tag">UNLIMITED</div>
+                <div>
+                    <h3 style="color: #673ab7; font-size: 28px; margin-bottom: 15px;">El Remedio del Corazón</h3>
+                    <p><strong>Service:</strong> A session dedicated to lifting your spirit whenever you feel down.</p>
+                    <p><strong>Bonus:</strong> I'll remind you how special and beautiful you are.</p>
+                    <p style="color: #e91e63; font-weight: 800; margin-top: 15px;">
+                        <i class="fa-solid fa-sun"></i> BRIGHTEST DAYS GUARANTEED
+                    </p>
+                </div>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/393279315544?text=No%20refunds!%20I'm%20officially%20redeeming:%20El%20Remedio%20del%20Coraz%C3%B3n" alt="QR Code">
+                    <div class="qr-text">scan to redeem</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" style="background-image: url('https://images.unsplash.com/photo-1512813195386-6cf811ad3542?auto=format&fit=crop&q=80&w=1280'); background-size: cover; background-position: center;">
+    <div style="background: rgba(255, 250, 240, 0.95); padding: 40px; border-radius: 20px; text-align: center; margin: auto; border: 3px solid #d84315;">
+        <h2 style="border: none;">Terms and Conditions</h2>
+        <div style="text-align: left; display: inline-block; margin-top: 30px; list-style: none;">
+            <div style="margin-bottom: 15px; font-size: 20px;"><i class="fa-solid fa-star" style="color: #d84315; margin-right: 15px;"></i> Vouchers are non-transferable (exclusive for Valeria).</div>
+            <div style="margin-bottom: 15px; font-size: 20px;"><i class="fa-solid fa-heart" style="color: #d84315; margin-right: 15px;"></i> Valid for an unlimited number of smiles.</div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" style="background-color: #d84315;">
+    <div class="content-area" style="text-align: center; color: white;">
+        <h2 style="color: white; font-size: 60px;">¿LISTA PARA DISFRUTAR?</h2>
+        <p style="color: #ffeb3b; font-size: 30px; margin-top: 20px;">Your vouchers are ready, Valeria.</p>
+        <div style="margin-top: 40px;">
+            <i class="fa-solid fa-ticket" style="font-size: 100px; color: #ffeb3b;"></i>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
