@@ -56,14 +56,21 @@
 
         h1, h2, h3 { color: #d84315; font-family: 'Montserrat', sans-serif; text-transform: uppercase; margin: 0; }
         
+        /* MIGLIORAMENTO FONT COUPON LABEL */
         .v-header-label { 
             display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
-            padding: 10px 0; 
-            margin-bottom: 12px; 
+            font-size: 13px; font-weight: 800; letter-spacing: 2.5px;
+            padding: 8px 0; 
+            margin-bottom: 10px; 
             border-bottom: 2px solid #00bfa5; width: 100%;
             text-align: center;
+            background: linear-gradient(transparent, rgba(0, 191, 165, 0.05));
+            color: #d84315;
         }
+        
+        /* Simbolo # nero e numero rosso acceso */
+        .hash-symbol { color: #000000; margin-left: 5px; }
+        .coupon-number { color: #ff0000; }
 
         .v-main-name { font-size: 12px; color: #00bfa5; font-weight: 800; line-height: 1.1; margin-bottom: 4px; }
         .v-text { font-size: 8.5px; line-height: 1.2; color: #4e342e; margin-bottom: 3px; }
@@ -103,12 +110,12 @@
             font-weight: 800; 
             color: #d84315; 
             text-transform: uppercase; 
-            white-space: nowrap; /* Forza su una riga */
+            white-space: nowrap; 
             letter-spacing: 0.5px;
         }
         
         .qr-arrow {
-            font-size: 14px; /* Più grande ed evidente */
+            font-size: 14px; 
             color: #00bfa5;
             animation: pointRight 1s infinite alternate ease-in-out;
         }
@@ -162,7 +169,7 @@
     <div class="papel-picado"></div>
     <div class="v-img-wrapper"><img src="https://s7g10.scene7.com/is/image/barcelo/pin-and-travel-mole-poblano-chiles2x-1?&&fmt=webp-alpha&qlt=75&wid=2000&fit=crop,1"></div>
     <div class="v-content-right">
-        <div class="v-header-label">Coupon #01</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">1</span></div>
         <div class="v-main-name">La Fiesta Gastronómica</div>
         <div class="v-text"><b>Service:</b> A complete tasting experience in the best Mexican restaurant in town.</div>
         <div class="v-text"><b>Bonus:</b> From Guacamole to artisanal Mole.</div>
@@ -184,7 +191,7 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxD8__vXOswWvMZl_U8jOPOPm87ftCRBiCuo6w6RiALZj62xZ77C5pPo4c&s=10" onerror="this.src='https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&q=80&w=400';">
     </div>
     <div class="v-content-right">
-        <div class="v-header-label">Coupon #02</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">2</span></div>
         <div class="v-main-name">Emergencia Bandidos</div>
         <div class="v-text"><b>Service:</b> A rescue lunch at Bandidos whenever you didn't feel like or forgot to prep your meal.</div>
         <div class="qr-bottom-right">
@@ -202,7 +209,7 @@
     <div class="papel-picado"></div>
     <div class="v-img-wrapper"><img src="https://www.wholesomeyum.com/wp-content/uploads/2023/10/wholesomeyum-How-To-Cook-Turkey-Bacon-In-The-Oven-7.jpg"></div>
     <div class="v-content-right">
-        <div class="v-header-label">Coupon #03</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">3</span></div>
         <div class="v-main-name">Búsqueda: Tocino de Pavo</div>
         <div class="v-text"><b>Service:</b> a dedicated search mission to find the rare and healthy turkey bacon in the italian stores</div>
         <div class="qr-bottom-right">
@@ -220,7 +227,7 @@
     <div class="papel-picado"></div>
     <div class="v-img-wrapper"><img src="https://storage.googleapis.com/fp-media/1/2019/02/cambio_manuale.jpg"></div>
     <div class="v-content-right">
-        <div class="v-header-label">Coupon #04</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">4</span></div>
         <div class="v-main-name">Misión: Tres Pedali</div>
         <div class="v-text"><b>Service:</b> Learn the art of manual shifting and master the gears like a true driver.</div>
         <div class="v-text" style="font-weight: bold; color: #d84315;">Bonus: unlimited patience provided by the instructor.</div>
@@ -241,7 +248,7 @@
         <img src="https://raw.githubusercontent.com/zillipaolo84-commits/valeria-experience/main/Monticello_est.jpg" onerror="this.src='https://images.unsplash.com/photo-1544161515-436cefd1f16d?auto=format&fit=crop&w=400';">
     </div>
     <div class="v-content-right">
-        <div class="v-header-label">Coupon #05</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">5</span></div>
         <div class="v-main-name">El Oasis de Serenidad</div>
         <div class="v-text"><b>Service:</b> A whole day of absolute relaxation at a spa after a week of work.</div>
         <div class="qr-bottom-right">
@@ -259,7 +266,7 @@
     <div class="papel-picado"></div>
     <div class="v-img-wrapper"><img src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&q=80&w=1000"></div>
     <div class="v-content-right">
-        <div class="v-header-label">Coupon #06</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">6</span></div>
         <div class="v-main-name">Venecia: Rincones Secretos</div>
         <div class="v-text"><b>Service:</b> A guided exploration of Venice, discovering hidden alleys and silent canals.</div>
         <div class="v-text" style="font-style: italic; color: #d84315; margin-top: 5px;">Hint: to really visit Venice you have to get lost</div>
@@ -280,7 +287,7 @@
         <img src="https://raw.githubusercontent.com/zillipaolo84-commits/valeria-experience/main/lago%20limides.JPG" onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400';">
     </div>
     <div class="v-content-right">
-        <div class="v-header-label"> Coupon #07</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">7</span></div>
         <div class="v-main-name">El Lago de Cristal</div>
         <div class="v-text"><b>Service:</b> A mountain hiking excursion to discover a stunning Dolomitic lake.</div>
         <div class="v-text" style="color: #e91e63; font-weight: bold;">Bonus: I'll drive, you choose the playlist.</div>
@@ -302,7 +309,7 @@
         <img src="https://raw.githubusercontent.com/zillipaolo84-commits/valeria-experience/main/TX-MX.jpg" onerror="this.src='https://images.unsplash.com/photo-1469533778471-92a68acc3633?auto=format&fit=crop&w=400';">
     </div>
     <div class="v-content-right">
-        <div class="v-header-label">Coupon #08</div>
+        <div class="v-header-label">COUPON <span class="hash-symbol">#</span><span class="coupon-number">8</span></div>
         <div class="v-main-name">El Remedio del Corazón</div>
         <div class="v-text"><b>Service:</b> A session dedicated to lifting your spirit whenever you feel down.</div>
         <div class="v-text"><b>Bonus:</b> I'll remind you how special and beautiful you are.</div>
