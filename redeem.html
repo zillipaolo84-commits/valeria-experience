@@ -3,104 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voucher Activated!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <title>Coupon Redeemed - Valeria Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body {
+        :root {
+            --primary: #d84315;
+            --secondary: #00bfa5;
+            --accent: #ffeb3b;
+            --dark: #121212;
+        }
+
+        body, html {
             margin: 0;
             padding: 0;
-            background: #1a1a1a; /* Sfondo scuro per far risaltare i fuochi */
-            color: white;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--dark);
             font-family: 'Lato', sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            text-align: center;
+            align-items: center;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
         .container {
+            position: relative;
             z-index: 10;
-            background: rgba(216, 67, 21, 0.9);
-            padding: 40px;
-            border-radius: 20px;
-            border: 4px solid #ffeb3b;
-            box-shadow: 0 0 30px rgba(255, 235, 59, 0.5);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            max-width: 480px;
+            width: 90%;
+            animation: popUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: #ffeb3b;
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
             text-transform: uppercase;
         }
 
-        p {
+        .message {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .coupon-name {
+            color: var(--accent);
+            font-weight: 800;
             font-size: 1.5rem;
-            margin-bottom: 30px;
+            display: block;
+            margin: 15px 0;
+            text-shadow: 0 0 15px rgba(255, 235, 59, 0.3);
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .btn {
-            background: #ffeb3b;
-            color: #d84315;
-            padding: 20px 50px;
+        .instruction {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            display: block;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .btn-continue {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 45px;
             border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
             text-transform: uppercase;
-            transition: transform 0.2s;
-            display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(216, 67, 21, 0.3);
         }
 
-        .btn:hover { transform: scale(1.1); }
-
-        /* Animazione Fuochi d'Artificio Semplificata */
-        .firework {
-            position: absolute;
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
-            animation: explode 2s infinite;
+        .btn-continue:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(216, 67, 21, 0.5);
+            background: #f4511e;
         }
 
-        @keyframes explode {
-            0% { box-shadow: 0 0 #fff; opacity: 1; }
-            100% { 
-                box-shadow: -100px -100px #ff0055, 100px -100px #00ffcc, -100px 100px #ffeb3b, 100px 100px #ff5722, 0px -150px #e91e63, 0px 150px #00bfa5;
-                opacity: 0; 
-            }
+        .icon-check {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            display: block;
         }
-
-        .f1 { top: 20%; left: 20%; animation-delay: 0.5s; }
-        .f2 { top: 10%; left: 70%; animation-delay: 1s; }
-        .f3 { top: 70%; left: 15%; animation-delay: 1.5s; }
-        .f4 { top: 60%; left: 80%; animation-delay: 0.2s; }
     </style>
 </head>
 <body>
-    <div class="firework f1"></div>
-    <div class="firework f2"></div>
-    <div class="firework f3"></div>
-    <div class="firework f4"></div>
+
+    <canvas id="canvas"></canvas>
 
     <div class="container">
+        <i class="fa-solid fa-circle-check icon-check"></i>
         <h1>Awesome!!</h1>
-        <p>Great Choice.</p>
-        <a href="#" id="whatsapp-link" class="btn">Continue</a>
+        <div class="message">
+            Thank you for choosing to redeem 
+            <span id="coupon-display" class="coupon-name">Your Selection</span>
+            <span class="instruction">Click continue to start.</span>
+        </div>
+        <a href="#" id="wa-link" class="btn-continue">
+            Continue <i class="fa-solid fa-arrow-right"></i>
+        </a>
     </div>
 
     <script>
-        // Funzione per leggere il messaggio dall'URL e impostare il link WhatsApp
-        const urlParams = new URLSearchParams(window.location.search);
-        const voucherTitle = urlParams.get('msg') || "Voucher";
-        const phoneNumber = "393279315544";
-        const fullMessage = "No refunds! I'm officially redeeming: " + voucherTitle;
-        
-        document.getElementById('whatsapp-link').href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
+        let couponTitle = "the coupon";
+
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            const phone = "393279315544";
+            
+            if (msg) {
+                couponTitle = decodeURIComponent(msg);
+                document.getElementById('coupon-display').textContent = couponTitle;
+            } else {
+                // Fallback se visitato senza QR code
+                document.getElementById('coupon-display').textContent = "Your Exclusive Coupon";
+            }
+            
+            // Aggiorna sempre il link WhatsApp (con fallback se msg manca)
+            const waText = encodeURIComponent(`I’m ready to redeem the coupon ${couponTitle}`);
+            document.getElementById('wa-link').href = `https://wa.me/${phone}?text=${waText}`;
+            
+            initFireworks();
+        };
+
+        function initFireworks() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor(x, y, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.color = color;
+                    this.velocity = {
+                        x: (Math.random() - 0.5) * 10,
+                        y: (Math.random() - 0.5) * 10
+                    };
+                    this.alpha = 1;
+                    this.gravity = 0.08;
+                    this.friction = 0.97;
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = this.alpha;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                update() {
+                    this.velocity.x *= this.friction;
+                    this.velocity.y *= this.friction;
+                    this.velocity.y += this.gravity;
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+                    this.alpha -= 0.008;
+                }
+            }
+
+            function spawnFirework() {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * (canvas.height * 0.7);
+                const colors = ['#00bfa5', '#d84315', '#ffeb3b', '#e91e63', '#ffffff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                for (let i = 0; i < 70; i++) {
+                    particles.push(new Particle(x, y, color));
+                }
+            }
+
+            function animate() {
+                ctx.fillStyle = 'rgba(18, 18, 18, 0.15)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, i) => {
+                    if (p.alpha > 0) {
+                        p.update();
+                        p.draw();
+                    } else {
+                        particles.splice(i, 1);
+                    }
+                });
+                if (Math.random() < 0.04) spawnFirework();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
     </script>
 </body>
 </html>
