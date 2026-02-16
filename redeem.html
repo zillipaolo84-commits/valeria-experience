@@ -121,6 +121,22 @@
             margin-bottom: 1.5rem;
             display: block;
         }
+
+        .wa-info {
+            color: white;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 1.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .wa-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dashed var(--secondary);
+        }
     </style>
 </head>
 <body>
@@ -135,9 +151,15 @@
             <span id="coupon-display" class="coupon-name">Your Selection</span>
             <span class="instruction">Click continue to start.</span>
         </div>
+        
         <a href="#" id="wa-link" class="btn-continue">
-            Continue <i class="fa-solid fa-arrow-right"></i>
+            Continue <i class="fa-brands fa-whatsapp"></i>
         </a>
+
+        <p class="wa-info">
+            It will open WhatsApp with a message to my contact <br>
+            <a href="tel:+393279315544">+39 327 93 155 44</a>
+        </p>
     </div>
 
     <script>
@@ -152,11 +174,9 @@
                 couponTitle = decodeURIComponent(msg);
                 document.getElementById('coupon-display').textContent = couponTitle;
             } else {
-                // Fallback se visitato senza QR code
                 document.getElementById('coupon-display').textContent = "Your Exclusive Coupon";
             }
             
-            // Aggiorna sempre il link WhatsApp (con fallback se msg manca)
             const waText = encodeURIComponent(`I’m ready to redeem the coupon ${couponTitle}`);
             document.getElementById('wa-link').href = `https://wa.me/${phone}?text=${waText}`;
             
