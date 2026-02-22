@@ -122,20 +122,19 @@
             display: block;
         }
 
-        .wa-info {
+        .wa-footer-info {
             color: white;
             font-size: 0.85rem;
             opacity: 0.7;
             margin-top: 1.5rem;
             font-weight: 300;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        .wa-info a {
+        .wa-footer-info a {
             color: var(--secondary);
             text-decoration: none;
             font-weight: 700;
-            border-bottom: 1px dashed var(--secondary);
         }
     </style>
 </head>
@@ -156,8 +155,8 @@
             Continue <i class="fa-brands fa-whatsapp"></i>
         </a>
 
-        <p class="wa-info">
-            It will open WhatsApp with a message to my contact <br>
+        <p class="wa-footer-info">
+            A WhatsApp message will be sent to my number <br>
             <a href="tel:+393279315544">+39 327 93 155 44</a>
         </p>
     </div>
@@ -177,7 +176,8 @@
                 document.getElementById('coupon-display').textContent = "Your Exclusive Coupon";
             }
             
-            const waText = encodeURIComponent(`I’m ready to redeem the coupon ${couponTitle}`);
+            // Messaggio WhatsApp aggiornato: "Redeeming the coupon [Nome]"
+            const waText = encodeURIComponent(`Redeeming the coupon ${couponTitle}`);
             document.getElementById('wa-link').href = `https://wa.me/${phone}?text=${waText}`;
             
             initFireworks();
