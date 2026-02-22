@@ -82,14 +82,6 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        .instruction {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            display: block;
-            margin-top: 10px;
-            font-weight: 300;
-        }
-
         .btn-continue {
             background: var(--primary);
             color: white;
@@ -136,9 +128,47 @@
             text-decoration: none;
             font-weight: 700;
         }
+
+        /* Stile per il controllo musica */
+        #music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0px rgba(255, 255, 255, 0); }
+        }
     </style>
 </head>
 <body>
+
+    <audio id="mexican-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-control" class="pulse">
+        <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+    </div>
 
     <canvas id="canvas"></canvas>
 
@@ -148,7 +178,7 @@
         <div class="message">
             Thank you for choosing to redeem 
             <span id="coupon-display" class="coupon-name">Your Selection</span>
-            <span class="instruction">Click continue to start.</span>
+            <span class="instruction" style="display:block; margin-top:10px; opacity:0.8; font-weight:300; font-size:0.95rem;">Click continue to start.</span>
         </div>
         
         <a href="#" id="wa-link" class="btn-continue">
@@ -163,6 +193,9 @@
 
     <script>
         let couponTitle = "the coupon";
+        const music = document.getElementById('mexican-music');
+        const musicControl = document.getElementById('music-control');
+        const musicIcon = document.getElementById('music-icon');
 
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -176,12 +209,35 @@
                 document.getElementById('coupon-display').textContent = "Your Exclusive Coupon";
             }
             
-            // Messaggio WhatsApp aggiornato: "Redeeming the coupon [Nome]"
             const waText = encodeURIComponent(`Redeeming the coupon ${couponTitle}`);
-            document.getElementById('wa-link').href = `https://wa.me/${phone}?text=${waText}`;
+            const waLink = document.getElementById('wa-link');
+            waLink.href = `https://wa.me/${phone}?text=${waText}`;
             
+            // Gestione musica manuale
+            musicControl.addEventListener('click', () => {
+                toggleMusic();
+            });
+
+            // Avvio musica al click su Continue
+            waLink.addEventListener('click', () => {
+                music.play();
+            });
+
             initFireworks();
         };
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+                musicControl.classList.remove('pulse');
+                musicControl.style.background = "rgba(0, 191, 165, 0.4)";
+            } else {
+                music.pause();
+                musicIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+                musicControl.style.background = "rgba(255, 255, 255, 0.1)";
+            }
+        }
 
         function initFireworks() {
             const canvas = document.getElementById('canvas');
@@ -208,7 +264,6 @@
                     this.gravity = 0.08;
                     this.friction = 0.97;
                 }
-
                 draw() {
                     ctx.save();
                     ctx.globalAlpha = this.alpha;
@@ -218,7 +273,6 @@
                     ctx.fill();
                     ctx.restore();
                 }
-
                 update() {
                     this.velocity.x *= this.friction;
                     this.velocity.y *= this.friction;
