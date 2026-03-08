@@ -76,10 +76,23 @@
             color: var(--accent);
             font-weight: 800;
             font-size: 1.5rem;
-            display: block;
+            display: inline-block;
             margin: 15px 0;
             text-shadow: 0 0 15px rgba(255, 235, 59, 0.3);
             font-family: 'Montserrat', sans-serif;
+            min-height: 1.5em; /* Previene il salto del layout durante l'effetto */
+        }
+
+        /* Effetto cursore per Typewriter */
+        .coupon-name::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            margin-left: 5px;
+            color: var(--accent);
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
         }
 
         .btn-continue {
@@ -129,7 +142,6 @@
             font-weight: 700;
         }
 
-        /* Stile per il controllo musica */
         #music-control {
             position: fixed;
             top: 20px;
@@ -177,7 +189,7 @@
         <h1>Awesome!!</h1>
         <div class="message">
             Thank you for choosing to redeem 
-            <span id="coupon-display" class="coupon-name">Your Selection</span>
+            <span id="coupon-display" class="coupon-name"></span>
             <span class="instruction" style="display:block; margin-top:10px; opacity:0.8; font-weight:300; font-size:0.95rem;">Click continue to start.</span>
         </div>
         
@@ -202,29 +214,39 @@
             const msg = urlParams.get('msg');
             const phone = "393279315544";
             
-            if (msg) {
-                couponTitle = decodeURIComponent(msg);
-                document.getElementById('coupon-display').textContent = couponTitle;
-            } else {
-                document.getElementById('coupon-display').textContent = "Your Exclusive Coupon";
-            }
+            // Determina il titolo del coupon
+            const finalTitle = msg ? decodeURIComponent(msg) : "Your Exclusive Coupon";
             
-            const waText = encodeURIComponent(`Redeeming the coupon ${couponTitle}`);
+            // Effetto Typewriter
+            typeWriter(finalTitle, "coupon-display", 80);
+            
+            // Configurazione link WhatsApp come richiesto
+            const waText = encodeURIComponent(`I'm ready to redeem ${finalTitle}`);
             const waLink = document.getElementById('wa-link');
             waLink.href = `https://wa.me/${phone}?text=${waText}`;
             
-            // Gestione musica manuale
-            musicControl.addEventListener('click', () => {
-                toggleMusic();
-            });
-
-            // Avvio musica al click su Continue
-            waLink.addEventListener('click', () => {
-                music.play();
-            });
+            // Gestione musica
+            musicControl.addEventListener('click', toggleMusic);
+            waLink.addEventListener('click', () => { if(music.paused) music.play(); });
 
             initFireworks();
         };
+
+        // Funzione per effetto scrittura
+        function typeWriter(text, elementId, speed) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            element.innerHTML = "";
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
 
         function toggleMusic() {
             if (music.paused) {
