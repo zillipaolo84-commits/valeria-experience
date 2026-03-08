@@ -80,7 +80,7 @@
             margin: 15px 0;
             text-shadow: 0 0 15px rgba(255, 235, 59, 0.3);
             font-family: 'Montserrat', sans-serif;
-            min-height: 1.5em; /* Previene il salto del layout durante l'effetto */
+            min-height: 1.5em;
         }
 
         /* Effetto cursore per Typewriter */
@@ -141,46 +141,9 @@
             text-decoration: none;
             font-weight: 700;
         }
-
-        #music-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .pulse {
-            animation: pulse-animation 2s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0px rgba(255, 255, 255, 0); }
-        }
     </style>
 </head>
 <body>
-
-    <audio id="mexican-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="music-control" class="pulse">
-        <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
-    </div>
 
     <canvas id="canvas"></canvas>
 
@@ -204,11 +167,6 @@
     </div>
 
     <script>
-        let couponTitle = "the coupon";
-        const music = document.getElementById('mexican-music');
-        const musicControl = document.getElementById('music-control');
-        const musicIcon = document.getElementById('music-icon');
-
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const msg = urlParams.get('msg');
@@ -220,15 +178,11 @@
             // Effetto Typewriter
             typeWriter(finalTitle, "coupon-display", 80);
             
-            // Configurazione link WhatsApp come richiesto
+            // Configurazione link WhatsApp
             const waText = encodeURIComponent(`I'm ready to redeem ${finalTitle}`);
             const waLink = document.getElementById('wa-link');
             waLink.href = `https://wa.me/${phone}?text=${waText}`;
             
-            // Gestione musica
-            musicControl.addEventListener('click', toggleMusic);
-            waLink.addEventListener('click', () => { if(music.paused) music.play(); });
-
             initFireworks();
         };
 
@@ -246,19 +200,6 @@
                 }
             }
             typing();
-        }
-
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-                musicIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
-                musicControl.classList.remove('pulse');
-                musicControl.style.background = "rgba(0, 191, 165, 0.4)";
-            } else {
-                music.pause();
-                musicIcon.classList.replace('fa-volume-high', 'fa-volume-xmark');
-                musicControl.style.background = "rgba(255, 255, 255, 0.1)";
-            }
         }
 
         function initFireworks() {
